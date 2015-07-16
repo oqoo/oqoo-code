@@ -1,0 +1,62 @@
+<openerp>
+    <data>
+    	<template id="mobile.assets_special">
+    		<script src="/mobile_timesheet/static/src/js/mobile_timesheet.js"></script>
+    		<link rel="stylesheet" href="/mobile_timesheet/static/src/css/mobile_timesheet.css" />
+    	</template>
+        <template id="mobile_timesheet.client_bootstrap" name="Mobileclient Bootstrap">
+            <t t-call="mobile.layout">
+            	<t t-set="title" t-value="'工时申报'" />
+                <t t-set="head">
+                	<t t-call-assets="mobile.assets_common"/>
+                	<script>
+                    	$(document).on("mobileinit", function() {
+							$.extend( $.mobile, {
+								defaultPageTransition: "fade",
+								defaultDialogTransition: "pop",
+								autoInitializePage: false
+							});
+							$.mobile.toolbar.prototype.options.addBackBtn = true;
+							$.mobile.toolbar.prototype.options.backBtnText = "返回";
+						});
+                	</script>
+                    <t t-call-assets="mobile.assets_backend"/>
+                    <t t-call-assets="mobile.assets_special"/>
+                    <script type="text/javascript">
+                        $(function() {
+                            var s = new openerp.init();
+							var m = new openerp.web.mobile.Pagecontainer();
+                            m.setElement($(document.body));
+                            m.start();
+                        });
+                    </script>
+                </t>
+                
+				<div id="page1" data-role="page" data-template="mobile_timesheet.page1" data-title="填报工时"></div>
+				<div id="page2" data-role="page" data-template="mobile_timesheet.page2"
+					data-title-gen="this.pagecontext.get('data')[0].substring(5) + '~' + this.pagecontext.get('data')[this.pagecontext.get('data').length-1].substring(5)">
+				</div>
+				<div id="page3" data-role="page" data-template="mobile_timesheet.page3" data-title-gen="this.pagecontext.get('data').substring(5)"></div>
+				<div id="page4" data-role="page" data-template="mobile_timesheet.page4" data-title="我的工时"></div>
+				<div id="page5" data-role="page" data-template="mobile_timesheet.page5" data-title-gen="this.pagecontext.get('fromdate').substring(0,7)"></div>
+				
+				<div data-role="popup" id="popupInputPrompt" data-theme="a" data-overlay-theme="b" data-position-to="window">
+					<div class="ui-content">
+						<ul></ul>
+					</div>
+					<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">关闭</a>
+				</div>
+				
+				<div data-role="popup" id="popupError" data-overlay-theme="b" data-theme="a" data-position-to="window">
+					<div data-role="header" data-theme="a" class="ui-header ui-bar-a">
+						<h1 class="ui-title" style="margin:0 10%;">Error</h1>
+					</div>
+					<div class="ui-content">
+						<div class="oex-errmsg"></div>
+						<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">关闭</a>
+					</div>
+				</div>
+            </t>
+        </template>
+    </data>
+</openerp>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- vim:fdl=1:
+-->
+<templates id="template" xml:space="preserve">
+
+<t t-name="list">
+	<ul data-role="listview" class="oex-list"></ul>
+</t>
+<t t-name="list.pageable">
+	<div class="oex-list-pulldown">pull down to refresh......</div>
+    <ul data-role="listview" class="oex-list"></ul>
+	<div class="oex-list-pullup">pull up to load next page......</div>
+</t>
+
+<t t-name="select.options" t-foreach="options" t-as="option">
+    <option t-att-value="JSON.stringify(option[0])">
+        <t t-esc="option[1]"/>
+    </option>
+</t>
+
+</templates>

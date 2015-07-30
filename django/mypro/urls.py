@@ -21,7 +21,7 @@ from base import urls as base_urls
 from polls import urls as polls_urls
 
 urlpatterns = [
-    url(r'^bootstrap/', include(base_urls)),
+    url(r'(^$)|(^bootstrap)/', include(base_urls)),
     url(r'^polls/', include(polls_urls)),
     url(r'^admin/', include(admin.site.urls)),
 ]
